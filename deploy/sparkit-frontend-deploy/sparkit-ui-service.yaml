@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    name: sparkit-ui
+  name: sparkit-ui-service
+  namespace: spark-operator
+spec:
+  clusterIP: 10.99.152.82
+  externalTrafficPolicy: Cluster
+  ports:
+    - name: http
+      port: 80
+      protocol: TCP
+      targetPort: http
+  selector:
+    name: sparkit-ui
+  sessionAffinity: None
+  type: NodePort

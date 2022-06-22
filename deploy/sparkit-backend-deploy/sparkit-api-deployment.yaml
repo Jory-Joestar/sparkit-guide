@@ -1,0 +1,34 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sparkit-api-v1
+  namespace: spark-operator
+  labels:
+    name: sparkit-api
+spec:
+  selector:
+    matchLabels:
+      name: sparkit-api
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        name: sparkit-api
+    spec:
+      volumes:
+        - name: task-pv-storage
+          persistentVolumeClaim:
+            claimName: task-pv-claim
+      containers:
+      - name: sparkit-api
+        image: joryjoestar/sparkit-backend:v1
+        imagePullPolicy: IfNotPresent
+        command: [ "backend" ]
+        volumeMounts:
+          - mountPath: "/etc/workingdir"
+            name: task-pv-storage
+        ports:
+        - containerPort: 8081
+          protocol: TCP
+          name: http
+      serviceAccountName: sparkit

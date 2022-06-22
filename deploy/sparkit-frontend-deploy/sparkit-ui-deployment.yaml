@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sparkit-ui-v1
+  namespace: spark-operator
+  labels:
+    name: sparkit-ui
+spec:
+  selector:
+    matchLabels:
+      name: sparkit-ui
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        name: sparkit-ui
+    spec:
+      containers:
+        - name: sparkit-ui
+          image: joryjoestar/sparkit-frontend:v1
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 80
+              protocol: TCP
+              name: http
