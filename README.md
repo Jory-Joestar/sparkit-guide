@@ -1,4 +1,4 @@
-# SparKit完全指南
+# SparKit不完全指南
 
 ## 快速部署
 
