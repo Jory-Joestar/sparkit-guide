@@ -18,13 +18,13 @@ Kubernetes (Version >= 1.16)
 
 建议在部署平台之前，提前将所有镜像下载到集群的所有节点中。镜像通过docker pull命令进行下载，所需的镜像列表如下：
 
-| 镜像                                         | 说明                                                |
-| -------------------------------------------- | --------------------------------------------------- |
-| gcr.io/spark-operator:v1beta2-1.2.3-3.1.1    | Spark Operator镜像                                  |
-| gcr.io/spark:v3.1.1                          | Spark on K8s镜像                                    |
-| joryjoestar/sparkit-backend:v1               | API接口服务镜像                                     |
-| joryjoestar/sparkit-frontend:v1              | 前端服务镜像                                        |
-| joryjoestar/sparkit-frontend:v1-with-ingress | 前端服务镜像，需要部署ingress，在部署CS-Cloud时使用 |
+| 镜像                                                     | 说明                                                |
+| -------------------------------------------------------- | --------------------------------------------------- |
+| gcr.io/spark-operator/spark-operator:v1beta2-1.2.3-3.1.1 | Spark Operator镜像                                  |
+| gcr.io/spark-operator/spark:v3.1.1                       | Spark on K8s镜像                                    |
+| joryjoestar/sparkit-backend:v1                           | API接口服务镜像                                     |
+| joryjoestar/sparkit-frontend:v1                          | 前端服务镜像                                        |
+| joryjoestar/sparkit-frontend:v1-with-ingress             | 前端服务镜像，需要部署ingress，在部署CS-Cloud时使用 |
 
 镜像来源有两种，可以使用现有仓库中的镜像（Docker hub），也可以从项目构建、推送到自己的仓库中。
 
