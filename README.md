@@ -1,11 +1,5 @@
 # SparKit不完全指南
 
-## 快速部署
-
-
-
-
-
 ## 部署手册
 
 ### 准备工作
@@ -70,7 +64,7 @@ docker tag joryjoestar/spark:v3.1.1 gcr.io/spark-operator/spark:v3.1.1
 
 #### 部署
 
-使用本项目中的deploy/spark-operator目录下的文件进行部署，将所有文件上传至Kubernetes集群或可以使用kubectl的客户端，依次使用以下命令进行部署。
+使用本项目中的`deploy/spark-operator-deploy`目录下的文件进行部署，将所有文件上传至Kubernetes集群或可以使用kubectl的客户端，依次使用以下命令进行部署。
 
 ```shell
 ## 部署crd
@@ -103,6 +97,8 @@ kubectl get pods --namespace spark-operator
 ### 部署API层
 
 #### 部署
+
+部署文件位于本项目`deploy/sparkit-backend-deploy`目录下
 
 首先部署持久卷，如果Kubernetes配置了nfs，可以部署基于nfs的持久卷。注意在pv-volume-nfs.yaml文件中指定nfs服务器ip和路径
 
@@ -145,6 +141,8 @@ kubectl get svc -n spark-operator
 ### 部署UI层
 
 #### 部署
+
+部署文件位于本项目`deploy/sparkit-frontend-deploy`目录下
 
 注意，如果部署在CS-Cloud上，前端服务通过ingress访问，则需要修改`sparkit-ui-deployment.yaml`中的镜像为`joryjoestar/sparkit-frontend:v1-with-ingress`，还需部署`sparkit-ui-ingress.yaml`
 
