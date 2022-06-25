@@ -1,4 +1,4 @@
-# SparKit不完全指南
+# SparKit指南
 
 ## 部署手册
 
@@ -39,7 +39,7 @@ docker pull joryjoestar/sparkit-backend:v1
 docker pull joryjoestar/sparkit-frontend:v1
 ```
 
-拉取成功后将spark-operator和spark镜像打上tag
+**！！注意**：拉取成功后将spark-operator和spark镜像打上tag
 
 ```
 docker tag joryjoestar/spark-operator:v1beta2-1.2.3-3.1.1 gcr.io/spark-operator/spark-operator:v1beta2-1.2.3-3.1.1
@@ -179,7 +179,71 @@ kubectl port-forward --address 0.0.0.0 service/sparkit-ui-service 8081:80 -n spa
 
 
 
-
-
 ## 开发手册
+
+### Sparkit-api
+
+项目地址：https://github.com/Jory-Joestar/sparkplatform-api
+
+#### 开发新接口
+
+1. 在handler包中编写handle函数
+
+   ![image-20220625181214485](imgs/image-20220625181214485.png)
+
+   通过responseJSON函数响应HTTP请求，返回JSON数据
+
+   ![image-20220625181305785](imgs/image-20220625181305785.png)    
+
+2. 在路由中注册url和handle函数的映射关系
+
+   <img src="imgs/image-20220625181501429.png" alt="image-20220625181501429" style="zoom: 67%;" />  
+
+#### 使用Spark-operator和K8s客户端
+
+handle函数一般使用Spark-operator客户提供的客户端操作Spark应用，使用K8s客户端操作Pod。
+
+`NewAPIHandler`函数创建一个APIHandler，handle函数直接使用该APIHandler对象，handler.sparkAppCliend是Spark-operator客户端，而handler.kubeClient是K8s客户端。
+
+![image-20220625183041987](imgs/image-20220625183041987.png)  
+
+![image-20220625183127365](imgs/image-20220625183127365.png)  
+
+
+
+### Sparkit-ui
+
+项目地址：https://github.com/Jory-Joestar/sparkplatform-ui
+
+#### branch
+
+branch1：no-ingress-deploy，部署前端deploy和service，通过service的80端口访问。
+
+branch2：cs-cloud-deploy，部署前端deploy和service以及Ingress，通过BDKit域名下的`/sparkit`路径访问。
+
+两个branch由于一个是通过域名根路径访问，一个是通过`/sparkit`访问，配置方面稍有不同
+
+通过Ingress访问时，config/config.json需要配置base和publicPath
+
+![image-20220625184914149](imgs/image-20220625184914149.png)  
+
+service中的请求后端的路径也需要添加`/sparkit/`前缀
+
+![image-20220625185104920](imgs/image-20220625185104920.png)  
+
+某些页面直接引用的静态文件也需要修改路径
+
+![image-20220625185608964](imgs/image-20220625185608964.png)  
+
+
+
+#### 开发新页面
+
+参考：
+
+https://pro.ant.design/zh-CN/docs/new-page
+
+https://www.bilibili.com/video/BV1g54y187LJ
+
+https://github.com/ant-design/ant-design-pro
 
