@@ -28,7 +28,7 @@ Kubernetes (Version >= 1.16)
 
 镜像来源有两种，可以使用现有仓库中的镜像（Docker hub），也可以从项目构建、推送到自己的仓库中。
 
-##### (1) 从镜像仓库拉取
+##### (1) 方法1：从镜像仓库拉取
 
 从Docker hub拉取 (docker.io)
 
@@ -46,15 +46,19 @@ docker tag joryjoestar/spark-operator:v1beta2-1.2.3-3.1.1 gcr.io/spark-operator/
 docker tag joryjoestar/spark:v3.1.1 gcr.io/spark-operator/spark:v3.1.1
 ```
 
-##### (2) 从项目构建镜像
+##### (2) 方法2：从项目构建镜像
 
 也可以选择直接从前端和后端项目直接构建镜像。两个项目都编写了Dockerfile，并在此基础上编写了Makefile，使用make命令可以一键构建。
+
+自己构建时，修改makefile中的镜像tag，以便push到自己的仓库中
+
+<img src="imgs/image-20220625190402640.png" alt="image-20220625190402640" style="zoom:67%;" />  
 
 构建后端镜像只需Docker环境即可。
 
 构建前端镜像需要Node.js开发环境和Docker环境。
 
-构建完之后的镜像记得打上tag！！
+构建完之后，部署镜像记得打上tag！！
 
 #### Yaml文件
 
